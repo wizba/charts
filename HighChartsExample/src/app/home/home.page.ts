@@ -10,12 +10,17 @@ import * as Highcharts from 'highcharts';
 export class HomePage {
 
   chartsName:string='chartId';
+  pie;
+  //['Chrome',25],['Edge',13],['FireFox',3.7]
+  cValue=25;
+  eValue=50;
+  fVlaue=3.7;
   constructor() {}
 
   ionViewDidEnter() {
     this.plotSimpleBarChart();
   }
-
+  
   plotSimpleBarChart() {
     let the = Highcharts.chart('highcharts', {
       chart: {
@@ -44,6 +49,7 @@ export class HomePage {
           data: [5, 7, 3]
         }]
     });
+    let _this=this;
     let myChart=Highcharts.chart(this.chartsName, {
       chart: {
           type: 'areaspline'
@@ -103,7 +109,8 @@ export class HomePage {
           data: [1, 3, 4, 3, 3, 5, 4]
       }]
   });
-  Highcharts.chart('myContainer', {
+
+  this.pie=Highcharts.chart('myContainer', {
     chart: {
       plotBackgroundColor: null,
       plotBorderWidth: 0,
@@ -154,9 +161,34 @@ export class HomePage {
       ]
     }]
   });
+  console.log(this.pie.series[0].data[0]); 
   
+  
+
+  setInterval(()=>{
+     this.pie.series[0].setData([['Chrome',this.cValue],['Edge',this.eValue],['FireFox',this.fVlaue]]);
+    
+    this.cValue--;
+    this.eValue++;
+    this.fVlaue++;
+
+    if( this.cValue<5)
+    {
+         this.cValue=5;
+    }
+    },300);
+    
   }
 
+  
+  update()
+  {
+
+    
+    this.pie.series[0].setData([['Chrome',25],['Edge',13],['FireFox',3.7]]);
+   
+
+  }
   generatePiechat(){
     
   }
